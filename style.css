@@ -220,6 +220,10 @@ h4 {
 	margin-right: 2px;
 	}
 
+.sidescroll a{
+    cursor: default;
+}
+
 .left #content {
 	margin-left: 238px;
 	}
