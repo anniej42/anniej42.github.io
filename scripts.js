@@ -163,11 +163,6 @@ if (jQuery)(function() {
         if ($.fn.cycle.debug)
             log(s);
     }
-    
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-      console.log("fancybox loaded")
-    });
 
     function log() {
         if (window.console && console.log)
