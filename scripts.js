@@ -163,6 +163,11 @@ if (jQuery)(function() {
         if ($.fn.cycle.debug)
             log(s);
     }
+    
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+      console.log("fancybox loaded")
+    });
 
     function log() {
         if (window.console && console.log)
@@ -4303,7 +4308,6 @@ rsn.sideScroll.resize = function() {
             'height': imagesHeight + 'px'
         });
     } else {
-        log('Resizing sidescroll layout for "sidebar" layout');
         var windowHeight = (platform.browser.name == "msie" ? document.documentElement.clientHeight : $('html')[0].clientHeight);
         var sidebarWidth = $('header').width();
         var contentWidth = windowWidth - sidebarWidth;
@@ -4314,7 +4318,6 @@ rsn.sideScroll.resize = function() {
             'line-height': windowHeight - 30 + 'px'
         });
         if (marginTop > 0 || marginBottom > 0) {
-            log('adjusting heights for top/bottom margin thats been set');
             var maxHeight = windowHeight - marginTop - marginBottom;
             $('.images > li').css({
                 'max-height': maxHeight + 'px'
@@ -4454,9 +4457,9 @@ rsn.sideScroll.sidebar = function() {
         });
         $(document).on('click', '.images img', function(e) {
             e.preventDefault();
-            var e = $.Event('keydown');
-            e.which = 39;
-            $(document).trigger(e);
+            // var e = $.Event('keydown');
+            // e.which = 39;
+            // $(document).trigger(e);
         });
         var $sidebar = $('header');
         var $footer = $('footer');
