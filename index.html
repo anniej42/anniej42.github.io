@@ -18,6 +18,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.1/plugins/ScrollToPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/easing/EasePack.min.js"></script>
+    <script src="scripts.js"></script>
     <!-- Internet Exploder -->
     <!--[if lt IE 8]><script type="text/javascript">window.location="http://usestandards.com/upgrade?url="+document.location.href;</script><![endif]-->
     <!--[if IE]>
@@ -86,22 +87,22 @@
         </footer>
     </div>
     <!-- Javascripts -->
-    <script src="scripts.min.js"></script>
     <script>
-    var images;
+    var images = [];
 
     $(document).ready(function() {
         var w = window.innerWidth;
         var h = window.innerHeight;
-        console.log(w, h);
-        rsn.uniformHeight(0.6 * h);
+
         crop_align = "center center";
         var overlayWidth = 1000;
-        var image_max_height = 0.65 * h;
-        loadImages().done(setupScrolling);
+        var image_max_height = 0.6 * h;
         getFlickr();
-    });
+        rsn.uniformHeight(0.6 * h);
+        // loadImages().done(setupScrolling);
+        setupScrolling();
 
+    });
 
     function loadImages() {
         var r = $.Deferred();
@@ -197,20 +198,29 @@
     }
 
     function getFlickr() {
-        $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9fee699aa897cdc746e56accd7ac44fb&user_id=125879274%40N02&sort=interestingness-desc&extras=url_h&per_page=20&format=json&nojsoncallback=1", function(data) {
-            console.log(data);
+        $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9fee699aa897cdc746e56accd7ac44fb&user_id=125879274%40N02&sort=interestingness-desc&extras=url_l&per_page=20&format=json&nojsoncallback=1", function(data) {
             //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
             var photos = data.photos.photo;
-            for (var i=0; i<data.photos.photo.length; i++){
-              // var farmid = photos[i].farm;
-              // var serverid = photos[i].server;
-              // var photoid = photos[i].id;
-              // var secret = photos[i].secret;
-              // var size = "h";
-              // var url = "https://farm" + farmid + ".staticflickr.com/" + serverid + "/" + photoid + "_" + secret + "_" + size + ".jpg";
-              var url = photos[i].url_h;
-              console.log(url);
+            for (var i = 0; i < data.photos.photo.length; i++) {
+                // var farmid = photos[i].farm;
+                // var serverid = photos[i].server;
+                // var photoid = photos[i].id;
+                // var secret = photos[i].secret;
+                // var size = "h";
+                // var url = "https://farm" + farmid + ".staticflickr.com/" + serverid + "/" + photoid + "_" + secret + "_" + size + ".jpg";
+                var url = photos[i].url_l;
+                var title = photos[i].title;
+                // images.push({"src": url, "title": title});
+
+                if (i == 0) {
+                    a = '<li data-date="" id="photoAnchor"><a title="' + title + '"">'
+                } else {
+                    a = '<li data-date=""><a title="' + title + '"">'
+                }
+                img = '<img src="' + url + '" data-dimensions="640x960"></a></li>'
+                $(".images").append(a + img);
             }
+            $(window).trigger('resize')
         }).fail(function() {
             console.log("fail")
         });
@@ -231,3 +241,4 @@
     ga('create', 'UA-71093829-1', 'auto');
     ga('send', 'pageview');
     </script>
+</body>
