@@ -129,7 +129,6 @@
 
     function getFlickr(callback) {
         $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea239335e1d705835061e7147f53dad&user_id=125879274%40N02&sort=interestingness-desc&extras=url_l&per_page=20&format=json&nojsoncallback=1", function(data) {
-            console.log(data);
             //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
             var photos = data.photos.photo;
             for (var i = 0; i < data.photos.photo.length; i++) {
