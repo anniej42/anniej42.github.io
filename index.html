@@ -11,14 +11,15 @@
     <meta name="robots" content="noodp">
     <meta name="description" content="MIT alum">
     <!-- Stylesheets: Production -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/style.css">
     <link href='http://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.1/plugins/ScrollToPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/easing/EasePack.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="assets/nprogress.js"></script>
+    <link rel="stylesheet" href="assets/nprogress.css">
     <!-- Internet Exploder -->
     <!--[if lt IE 8]><script type="text/javascript">window.location="http://usestandards.com/upgrade?url="+document.location.href;</script><![endif]-->
     <!--[if IE]>
@@ -86,11 +87,11 @@
                 YAN ANNIE JIAO | MIT CLASS OF 2016 </p>
         </footer>
     </div>
-    <!-- Javascripts -->
     <script>
     var images = [];
 
     $(document).ready(function() {
+        NProgress.start();
         var w = window.innerWidth;
         var h = window.innerHeight;
 
@@ -101,81 +102,12 @@
         rsn.uniformHeight(0.6 * h);
         // loadImages().done(setupScrolling);
         // setupScrolling();
-
     });
 
-    function loadImages() {
-        var r = $.Deferred();
-        images = [{
-            "src": "https://farm2.staticflickr.com/1567/25191447315_4509312638_k.jpg",
-            "title": "dead sea"
-        }, {
-            "src": "https://farm2.staticflickr.com/1689/23714615834_a5d79c4340_k.jpg",
-            "title": "wuzhen, china"
-        }, {
-            "src": "https://farm1.staticflickr.com/529/19098424830_c0ebc289d1_k.jpg",
-            "title": "high places"
-        }, {
-            "src": "https://farm6.staticflickr.com/5752/20953841663_e7d81e2910_k.jpg",
-            "title": "Untitled"
-        }, {
-            "src": "https://farm1.staticflickr.com/628/20317163464_4b264b8157_k.jpg",
-            "title": "best wishes"
-        }, {
-            "src": "https://farm1.staticflickr.com/769/20191493704_94a77998db_k.jpg",
-            "title": "Iozan"
-        }, {
-            "src": "https://farm1.staticflickr.com/301/19452293675_ba8b67534b_k.jpg",
-            "title": "flares &amp; rumors"
-        }, {
-            "src": "https://c2.staticflickr.com/4/3910/18852975610_e284c7a707_k.jpg",
-            "title": "edges"
-        }, {
-            "src": "https://c1.staticflickr.com/1/501/18918258586_5aeb31ed88_k.jpg",
-            "title": "cataract falls"
-        }, {
-            "src": "https://farm1.staticflickr.com/381/17927851534_a384c5916b_h.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm9.staticflickr.com/8806/18051237342_b741aad8b3_h.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm8.staticflickr.com/7658/17061232527_9841427416_h.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm8.staticflickr.com/7283/16328273153_5fd149ad4c_h.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm9.staticflickr.com/8278/15650439077_37d1878ac0_b.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm8.staticflickr.com/7624/16572895060_bf5caca158_b.jpg",
-            "title": " "
-        }, {
-            "src": "https://farm8.staticflickr.com/7421/16441361556_73b4b3244c_b.jpg",
-            "title": " "
-        }, ];
 
-        for (var i = 0; i < images.length; i++) {
-            if (i == 0) {
-                a = '<li data-date="" id="photoAnchor"><a title="' + images[i].title + '"">'
-            } else {
-                a = '<li data-date=""><a title="' + images[i].title + '"">'
-            }
-            img = '<img src="' + images[i].src + '" data-dimensions="640x960"></a></li>'
-            $(".images").append(a + img);
-        }
-
-        setTimeout(function() {
-            // and call `resolve` on the deferred object, once you're done
-            r.resolve();
-        }, 2000);
-
-        // return the deferred object
-        return r;
-    }
 
     function setupScrolling() {
+
         $('.navbar').on("click", "a", function() {
             $(".navbar").children().removeClass("selected");
 
@@ -191,27 +123,18 @@
                     },
                     ease: Power3.easeOut
                 })
-                // .timeScale( 2000/dist);
             return false;
         });
-
     }
 
     function getFlickr(callback) {
         $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea239335e1d705835061e7147f53dad&user_id=125879274%40N02&sort=interestingness-desc&extras=url_l&per_page=20&format=json&nojsoncallback=1", function(data) {
-          console.log(data);
+            console.log(data);
             //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
             var photos = data.photos.photo;
             for (var i = 0; i < data.photos.photo.length; i++) {
-                // var farmid = photos[i].farm;
-                // var serverid = photos[i].server;
-                // var photoid = photos[i].id;
-                // var secret = photos[i].secret;
-                // var size = "h";
-                // var url = "https://farm" + farmid + ".staticflickr.com/" + serverid + "/" + photoid + "_" + secret + "_" + size + ".jpg";
                 var url = photos[i].url_l;
                 var title = photos[i].title;
-                // images.push({"src": url, "title": title});
 
                 if (i == 0) {
                     a = '<li data-date="" id="photoAnchor"><a title="' + title + '"">'
@@ -221,7 +144,10 @@
                 img = '<img src="' + url + '" data-dimensions="640x960"></a></li>'
                 $(".images").append(a + img);
             }
-            $(window).trigger('resize')
+            $(window).trigger('resize');
+            $(window).load(function() {
+                NProgress.done();
+            })
         }).fail(function() {
             console.log("fail")
         }).done(callback);
@@ -242,4 +168,5 @@
     ga('create', 'UA-71093829-1', 'auto');
     ga('send', 'pageview');
     </script>
+    <script src="assets/scripts.min.js"></script>
 </body>
