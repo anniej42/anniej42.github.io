@@ -11,6 +11,8 @@ body {
   line-height: 23px;
 }
 
+
+
 .left header {
   width: 238px;
   background-color: rgba(255, 255, 255, 0.91);
@@ -19,13 +21,14 @@ body {
 
 header h1 a {
   color: #333333;
-  top: 8%;
-  left: 50px;
+  top: 5vh;
+  left: 40px;
   right: auto;
-  width: 400px;
+  width: 20vw;
+  min-width: 238px;
   font-family: 'Amatic SC', cursive;
   font-weight: 400;
-  font-size: 2em;
+  font-size: 50px;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-align: left;
@@ -35,7 +38,10 @@ header h1 a {
 }
 
 .left nav {
-  top: 252px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
   left: 63px;
   right: auto;
   text-align: left;
@@ -46,7 +52,6 @@ nav a {
   background-color: transparent;
   font-family: Josefin Sans;
   font-size: 13px;
-  font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 5px;
   border-radius: 0;
