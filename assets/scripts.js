@@ -996,6 +996,8 @@ rsn.browserDetect = function() {
     $('body').addClass(platform.browser.engine);
     if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
         $('body').addClass('ios');
+        // $("ul").addClass("ui items");
+        // $("li").addClass("item");
     }
 };
 

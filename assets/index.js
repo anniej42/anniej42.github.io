@@ -19,7 +19,6 @@ $(function() {
     });
 
     function setupScrolling() {
-
         $('.navbar').on("click", "a", function() {
             $(".navbar").children().removeClass("selected");
 
@@ -54,9 +53,9 @@ $(function() {
                 var title = photos[i].title;
 
                 if (i == 0) {
-                    a = '<li data-date="" class="flickr" id="photoAnchor"><a title="' + title + '"">'
+                    a = '<li id="photoAnchor"><a title="' + title + '"">'
                 } else {
-                    a = '<li data-date="" class="flickr"><a title="' + title + '"">'
+                    a = '<li><a title="' + title + '"">'
                 }
                 img = '<img src="' + url + '" data-dimensions="640x960"></a></li>'
                 $(".images").append(a + img);
