@@ -1113,11 +1113,6 @@ rsn.sideScroll.sidebar = function() {
                 return false;
             }
         });
-        $('.left .images li').hover(function() {
-            $(this).addClass('hover');
-        }, function() {
-            $(this).removeClass('hover');
-        });
         $(document).keydown(function(e) {
             var sidebarWidth = parseInt($('header').css('width'));
             var windowWidth = parseInt($(window).width());
@@ -1135,7 +1130,7 @@ rsn.sideScroll.sidebar = function() {
                         var scrollTo = parseInt(scrollLeft + offset - sidebarWidth - contentWidth / 2 + imageWidth / 2);
                         $('html, body').animate({
                             scrollLeft: scrollTo
-                        }, 750);
+                        }, 500);
                         return false;
                     }
                 });
@@ -1151,7 +1146,7 @@ rsn.sideScroll.sidebar = function() {
                         var scrollTo = parseInt(scrollLeft + offset - sidebarWidth - contentWidth / 2 + imageWidth / 2);
                         $('html, body').animate({
                             scrollLeft: scrollTo
-                        }, 750);
+                        }, 500);
                         return false;
                     }
                 });
@@ -1169,104 +1164,6 @@ rsn.sideScroll.sidebar = function() {
         var sidebarWidth = $sidebar.width();
     }
 };
-rsn.sideScroll.headerWide = function() {
-    $('header').css('position', 'fixed');
-    $('footer').css('position', 'fixed');
-    rsn.sideScroll.resize();
-    if (!$('body').hasClass('ios')) {
-        $(window).resize(rsn.sideScroll.resize);
-    }
-    $('#content').css('visibility', 'visible');
-    $('body').append('<div id="scrollcatcher"></div>');
-    var scrollModifier = (navigator.appVersion.indexOf("Mac") != -1 ? 25 : 100);
-    $('html,body').mousewheel(function(event, delta, deltaX, deltaY) {
-        if (deltaY > 0 && deltaY > deltaX || deltaY < 0 && deltaY < deltaX) {
-            var speed = deltaY * scrollModifier;
-            if (speed > 200) var speed = 200;
-            if (speed < -200) var speed = -200;
-            if (platform.browser.name == "msie") {
-                var position = document.documentElement.scrollLeft + -speed;
-                document.documentElement.scrollLeft = position;
-            } else if (platform.browser.engine == "gecko") {
-                var position = $(document).scrollLeft() + -speed;
-                window.scrollTo(position, 0);
-            } else {
-                var position = $(this).scrollLeft() + -speed;
-                $(this)[0].scrollLeft = position;
-            }
-            return false;
-        }
-    });
-    $('.layout-header-wide .images li').hover(function() {
-        $(this).addClass('hover');
-    }, function() {
-        $(this).removeClass('hover');
-    });
-    $(document).keydown(function(e) {
-        var sidebarWidth = parseInt($('header').css('width'));
-        var windowWidth = parseInt($(window).width());
-        var contentWidth = windowWidth - sidebarWidth;
-        var padding = 20;
-        if (e.which == 37) {
-            $('html, body').stop();
-            var scrollLeft = $(window).scrollLeft();
-            $($('.images > li').get().reverse()).each(function() {
-                var offset = parseInt($(this).offset().left - scrollLeft);
-                var rightEdge = offset + parseInt($(this).width());
-                var limit = sidebarWidth + contentWidth / 2;
-                if (rightEdge < limit - padding) {
-                    var imageWidth = parseInt($(this).width());
-                    var scrollTo = parseInt(scrollLeft + offset - sidebarWidth - contentWidth / 2 + imageWidth / 2);
-                    $('html, body').animate({
-                        scrollLeft: scrollTo
-                    }, 750);
-                    return false;
-                }
-            });
-            return false;
-        } else if (e.which == 39) {
-            $('html, body').stop();
-            var scrollLeft = $(window).scrollLeft();
-            $('.images > li').each(function() {
-                var offset = parseInt($(this).offset().left - scrollLeft);
-                var limit = sidebarWidth + contentWidth / 2;
-                if (offset > limit + padding) {
-                    var imageWidth = parseInt($(this).width());
-                    var scrollTo = parseInt(scrollLeft + offset - sidebarWidth - contentWidth / 2 + imageWidth / 2);
-                    $('html, body').animate({
-                        scrollLeft: scrollTo
-                    }, 750);
-                    return false;
-                }
-            });
-            return false;
-        }
-    });
-    $(document).on('click', '.images img', function(e) {
-        e.preventDefault();
-        var e = $.Event('keydown');
-        e.which = 39;
-        $(document).trigger(e);
-    });
-};
-rsn.sideScroll.header = function() {
-    var scrollModifier = (navigator.appVersion.indexOf('Mac') != -1 ? 25 : 70);
-    $('.sidescroll .images').mousewheel(function(event, delta, deltaX, deltaY) {
-        if (deltaY > 0 && deltaY > deltaX || deltaY < 0 && deltaY < deltaX) {
-            var speed = deltaY * scrollModifier;
-            var position = $(this).scrollLeft() + -speed;
-            $(this)[0].scrollLeft = position;
-            return false;
-        }
-    });
-    $('.sidescroll').addClass('show');
-    $('.sidescroll .images li').hover(function() {
-        $(this).addClass('hover');
-    }, function() {
-        $(this).removeClass('hover');
-    });
-};
-
 rsn.computedStyles = function() {
     if ($('#page-index.centered.bleed footer').length > 0) {
         var width = parseInt($('#content').width());
@@ -1384,8 +1281,6 @@ $(document).ready(function() {
     try {
         rsn.browserDetect();
         if ($('body.left div.sidescroll').length > 0) rsn.sideScroll.sidebar();
-        if ($('body.centered div.sidescroll').length > 0) rsn.sideScroll.header();
-        if ($('.layout-header-wide div.sidescroll').length > 0) rsn.sideScroll.headerWide();
         rsn.computedStyles();
         if ($('.paged').length > 0) rsn.pages();
         if (typeof peek != "undefined") rsn.peek();
