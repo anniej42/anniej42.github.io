@@ -1,0 +1,101 @@
+@import url('http://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
+body {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    background-attachment: scroll;
+    color: #313131;
+    font-family: Josefin Sans;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 23px;
+}
+
+.left header {
+    width: 238px;
+    background-color: rgba(255, 255, 255, 0.91);
+    background-color: rgb(255, 255, 255)\9;
+}
+
+header h1 a {
+    color: #333333;
+    top: 8vh;
+    left: 60px;
+    right: auto;
+    width: 25vw;
+    min-width: 400px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 500;
+    font-size: 60px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    border-radius: 3px;
+    background-color: transparent;
+    position: absolute;
+}
+
+.left nav {
+    position: absolute;
+    margin: auto;
+    left: 60px;
+    right: auto;
+    text-align: left;
+}
+
+nav a {
+    color: #5a5353;
+    background-color: transparent;
+    font-family: Josefin Sans;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    border-radius: 0;
+    padding-left: -7px;
+    padding-right: -7px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+a{
+  color: #5a5353;
+}
+
+.left footer {
+    color: #646262;
+}
+
+#content a {
+    color: #bda559;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.sidescroll .images li {
+    margin-left: 2px;
+    margin-right: 2px;
+    background-size: contain;
+    background-color: white;
+}
+
+.sidescroll a {
+    cursor: default;
+}
+
+.left #content {
+    margin-left: 238px;
+}
+
+body nav .selected a {
+    color: #976700;
+    background-color: transparent;
+}
+
+body nav a:hover {
+    color: #976700;
+    background-color: transparent;
+}
+
+#noscroll {
+    width: 100%;
+}
