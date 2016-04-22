@@ -15,23 +15,24 @@ $(function() {
 
     $(".spinner").hide();
 
-    $.ajax({
-        url: "/illustration",
-        success: function(data) {
-            $(data).find("a:contains(.png)").each(function(i) {
-                // will loop through 
-                var images = $(this).attr("href");
-                var id = "";
-                if (i==0){
-                  id = "illustrationAnchor"
-                }
-                // 
-                var HTML = '<li id="'+id+'"><a> <img src="'+ images + '" data-dimensions="640x960"></a></li>'
-                $(".images").append(HTML)
-                $(window).trigger('resize');
-            });
-        }
-    });
+    // $.ajax({
+    //     url: "/illustration",
+    //     success: function(data) {
+    //         $(data).find("a:contains(.png)").each(function(i) {
+    //             // will loop through 
+    //             var images = $(this).attr("href");
+    //             var id = "";
+    //             if (i==0){
+    //               id = "illustrationAnchor"
+    //             }
+    //             // 
+    //             var HTML = '<li id="'+id+'"><a> <img src="'+ images + '" data-dimensions="640x960"></a></li>'
+    //             $(".images").append(HTML)
+    //             console.log(HTML)
+    //             $(window).trigger('resize');
+    //         });
+    //     }
+    // });
 
     function setupScrolling() {
         $('.navbar').on("click", "a", function() {
