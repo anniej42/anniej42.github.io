@@ -33,6 +33,8 @@ $(function() {
     //         });
     //     }
     // });
+    // 
+    // behance key: Zuj0DGh3PTPyqIub9EvZVj2SGtQMcafk
 
     function setupScrolling() {
         $('.navbar').on("click", "a", function() {
@@ -61,7 +63,8 @@ $(function() {
     }
 
     function getFlickr(callback) {
-        $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea239335e1d705835061e7147f53dad&user_id=125879274%40N02&sort=interestingness-desc&extras=url_l&per_page=20&format=json&nojsoncallback=1", function(data) {
+      // get new photos
+        $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea239335e1d705835061e7147f53dad&user_id=125879274%40N02&extras=url_l&per_page=5&format=json&nojsoncallback=1", function(data) {
             //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
             var photos = data.photos.photo;
             for (var i = 0; i < data.photos.photo.length; i++) {
@@ -78,9 +81,35 @@ $(function() {
             }
             $(window).trigger('resize');
 
+
         }).fail(function() {
             console.log("fail");
-        }).done(callback);
+        }).done(function() {
+
+          // get most popular photos
+            $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5ea239335e1d705835061e7147f53dad&user_id=125879274%40N02&sort=interestingness-desc&extras=url_l&per_page=15&format=json&nojsoncallback=1", function(data) {
+                //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
+                var photos = data.photos.photo;
+                for (var i = 0; i < data.photos.photo.length; i++) {
+                    var url = photos[i].url_l;
+                    var title = photos[i].title;
+
+                    if (i == 0) {
+                        a = '<li id="photoAnchor"><a title="' + title + '"">'
+                    } else {
+                        a = '<li><a title="' + title + '"">'
+                    }
+                    img = '<img src="' + url + '" data-dimensions="640x960"></a></li>'
+                    $(".images").append(a + img);
+                }
+                $(window).trigger('resize');
+
+            }).fail(function() {
+                console.log("fail");
+            }).done(callback);
+        });
+
+
     }
 
     (function(i, s, o, g, r, a, m) {
